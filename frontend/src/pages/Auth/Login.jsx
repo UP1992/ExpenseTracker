@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AuthLayout from '../../components/layout/AuthLayout'
+import { useNavigate } from 'react-router-dom';
+import Input from '../../components/Inputs/Input';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+  }
   return (
     <AuthLayout>
       <div className='flex justify-center h-3/4 flex-col lg:w-[70%] md:h-full'>
@@ -9,6 +20,16 @@ const Login = () => {
         <p className='text-xs text-slate-700 mt-[5px] mb-6'>
           Please enter your details to get logged in
         </p>
+
+        <form onSubmit={handleLogin} className='flex flex-col gap-4'>
+          <Input 
+            label="Email"
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(target) => setEmail(target.value)}
+          />
+        </form>
       </div>
     </AuthLayout>
   )
